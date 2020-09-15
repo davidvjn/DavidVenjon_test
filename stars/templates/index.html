@@ -1,0 +1,110 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto,wght@1,300&display=swap" rel="stylesheet">
+
+    <title>PopStars</title>
+    <style>
+        body {
+            margin: 0px;
+            padding: 0px;
+            font-family: roboto, 'Times New Roman', Times, serif;
+        }
+        /* header */
+        
+        header {
+            position: fixed;
+            top: 0;
+            z-index: 1;
+            width: 100%;
+        }
+        
+        h1 {
+            text-align: center;
+        }
+        /* left */
+        
+        #starlist {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 15%;
+            left: 0;
+            bottom: 0;
+            width: 25%;
+            height: 50%;
+            box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
+            background-color: white;
+        }
+        
+        .star-link {
+            display: block;
+            padding: 15px;
+            margin: 15px;
+            background-color: #F5F5F5;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 250ms;
+        }
+        
+        .star-link:hover {
+            background-color: #E0E0E0;
+            transition: all 250ms;
+        }
+        /* right */
+        
+        #stardetail {
+            display: flex;
+            flex-direction: column;
+            margin-left: 25%;
+            padding: 25px;
+            width: 75vw;
+            height: 75vh;
+            margin-top: 5%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>{{stars}}</h1>
+    </header>
+
+    <div id="starlist"></div>
+
+    <div id="stardetail"></div>
+
+    <script>
+        let $ = (x) => document.querySelector(x);
+
+        const data = {
+            {
+                data | safe
+            }
+        };
+        const starlist = $("#starlist");
+        const stardetail = $("#stardetail");
+
+        let starlistHTML = "";
+
+        function displayDetail(index) {
+            stardetail.innerHTML = data[index]["description"];
+        }
+
+        displayDetail(0);
+
+        for (let i = 0; i < data.length; i++) {
+            starlistHTML += "<div class=\"star-link\" id=\"stars" + i + "\">" + data[i]["firstname"] + " " + data[i]["name"] + "</div>";
+        }
+        starlist.innerHTML = starlistHTML;
+        const starlistItem = document.querySelectorAll(".star-link");
+        for (let i = 0; i < starlistItem.length; i++) {
+            starlistItem[i].addEventListener('click', (e) => {
+                displayDetail(i);
+            })
+        }
+    </script>
+</body>
+
+</html>
